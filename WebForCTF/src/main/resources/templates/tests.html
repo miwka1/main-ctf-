@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/pages/tests.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="body-test">
+
+<!-- Background Elements -->
+<div class="background"></div>
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<div class="test-container">
+    <!-- Header -->
+    <header class="test-header">
+        <div class="test-header-content">
+            <h1 class="test-title">
+                <span class="test-title-main">SECURITY</span>
+                <span class="test-title-sub">KNOWLEDGE TEST</span>
+            </h1>
+            <div class="test-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">Вопрос <span id="currentQuestion">1</span> из <span id="totalQuestions">25</span></div>
+            </div>
+        </div>
+        <div class="test-timer" id="timer">
+            <div class="timer-icon">⏱️</div>
+            <span id="timerText">∞</span>
+        </div>
+    </header>
+
+    <div class="questions-container" id="questionsContainer">
+        <!-- Вопрос 1 -->
+        <div class="question-card" data-id="1">
+            <div class="question-header">
+                <span class="question-number">Вопрос 1</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Какой UID у пользователя root в Linux?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q1" value="a"><span class="option-label">A</span><span class="option-text">1</span></label>
+                <label class="option"><input type="radio" name="q1" value="b"><span class="option-label">B</span><span class="option-text">999</span></label>
+                <label class="option"><input type="radio" name="q1" value="c"><span class="option-label">C</span><span class="option-text">0</span></label>
+                <label class="option"><input type="radio" name="q1" value="d"><span class="option-label">D</span><span class="option-text">500</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 2 -->
+        <div class="question-card" data-id="2">
+            <div class="question-header">
+                <span class="question-number">Вопрос 2</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Какой файл содержит хэши паролей?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q2" value="a"><span class="option-label">A</span><span class="option-text">/etc/passwd</span></label>
+                <label class="option"><input type="radio" name="q2" value="b"><span class="option-label">B</span><span class="option-text">/etc/login.defs</span></label>
+                <label class="option"><input type="radio" name="q2" value="c"><span class="option-label">C</span><span class="option-text">/etc/shadow</span></label>
+                <label class="option"><input type="radio" name="q2" value="d"><span class="option-label">D</span><span class="option-text">/var/log/auth.log</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 3 -->
+        <div class="question-card" data-id="3">
+            <div class="question-header">
+                <span class="question-number">Вопрос 3</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что означает маска прав rw-r--r--?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q3" value="a"><span class="option-label">A</span><span class="option-text">Только владелец может читать</span></label>
+                <label class="option"><input type="radio" name="q3" value="b"><span class="option-label">B</span><span class="option-text">Только владелец может писать</span></label>
+                <label class="option"><input type="radio" name="q3" value="c"><span class="option-label">C</span><span class="option-text">Владелец может читать/писать, остальные только читать</span></label>
+                <label class="option"><input type="radio" name="q3" value="d"><span class="option-label">D</span><span class="option-text">Все могут писать</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 4 -->
+        <div class="question-card" data-id="4">
+            <div class="question-header">
+                <span class="question-number">Вопрос 4</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Какой протокол обычно работает на порту 22?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q4" value="a"><span class="option-label">A</span><span class="option-text">FTP</span></label>
+                <label class="option"><input type="radio" name="q4" value="b"><span class="option-label">B</span><span class="option-text">Telnet</span></label>
+                <label class="option"><input type="radio" name="q4" value="c"><span class="option-label">C</span><span class="option-text">SSH</span></label>
+                <label class="option"><input type="radio" name="q4" value="d"><span class="option-label">D</span><span class="option-text">DNS</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 5 -->
+        <div class="question-card" data-id="5">
+            <div class="question-header">
+                <span class="question-number">Вопрос 5</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что означает статус порта filtered в Nmap?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q5" value="a"><span class="option-label">A</span><span class="option-text">Порт открыт</span></label>
+                <label class="option"><input type="radio" name="q5" value="b"><span class="option-label">B</span><span class="option-text">Порт закрыт</span></label>
+                <label class="option"><input type="radio" name="q5" value="c"><span class="option-label">C</span><span class="option-text">Пакеты фильтруются FW</span></label>
+                <label class="option"><input type="radio" name="q5" value="d"><span class="option-label">D</span><span class="option-text">Сервис не существует</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 6 -->
+        <div class="question-card" data-id="6">
+            <div class="question-header">
+                <span class="question-number">Вопрос 6</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Какой тип атаки подразумевает подделку MAC-адресов?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q6" value="a"><span class="option-label">A</span><span class="option-text">DNS Spoof</span></label>
+                <label class="option"><input type="radio" name="q6" value="b"><span class="option-label">B</span><span class="option-text">MITM через HTTPS</span></label>
+                <label class="option"><input type="radio" name="q6" value="c"><span class="option-label">C</span><span class="option-text">ARP Spoofing</span></label>
+                <label class="option"><input type="radio" name="q6" value="d"><span class="option-label">D</span><span class="option-text">SQL Injection</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 7 -->
+        <div class="question-card" data-id="7">
+            <div class="question-header">
+                <span class="question-number">Вопрос 7</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Какой флаг cookie предотвращает доступ JavaScript к нему?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q7" value="a"><span class="option-label">A</span><span class="option-text">Secure</span></label>
+                <label class="option"><input type="radio" name="q7" value="b"><span class="option-label">B</span><span class="option-text">HttpOnly</span></label>
+                <label class="option"><input type="radio" name="q7" value="c"><span class="option-label">C</span><span class="option-text">Lax</span></label>
+                <label class="option"><input type="radio" name="q7" value="d"><span class="option-label">D</span><span class="option-text">Strict</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 8 -->
+        <div class="question-card" data-id="8">
+            <div class="question-header">
+                <span class="question-number">Вопрос 8</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что делает UNION SELECT при SQL-инъекции?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q8" value="a"><span class="option-label">A</span><span class="option-text">Удаляет таблицу</span></label>
+                <label class="option"><input type="radio" name="q8" value="b"><span class="option-label">B</span><span class="option-text">Позволяет извлечь дополнительные данные</span></label>
+                <label class="option"><input type="radio" name="q8" value="c"><span class="option-label">C</span><span class="option-text">Шифрует данные</span></label>
+                <label class="option"><input type="radio" name="q8" value="d"><span class="option-label">D</span><span class="option-text">Включает логирование</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 9 -->
+        <div class="question-card" data-id="9">
+            <div class="question-header">
+                <span class="question-number">Вопрос 9</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что означает строка $6$ в хэше Linux?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q9" value="a"><span class="option-label">A</span><span class="option-text">MD5</span></label>
+                <label class="option"><input type="radio" name="q9" value="b"><span class="option-label">B</span><span class="option-text">SHA-1</span></label>
+                <label class="option"><input type="radio" name="q9" value="c"><span class="option-label">C</span><span class="option-text">SHA-512</span></label>
+                <label class="option"><input type="radio" name="q9" value="d"><span class="option-label">D</span><span class="option-text">Blowfish</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 10 -->
+        <div class="question-card" data-id="10">
+            <div class="question-header">
+                <span class="question-number">Вопрос 10</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что хранится в ARP-таблице?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q10" value="a"><span class="option-label">A</span><span class="option-text">Соответствие доменов IP</span></label>
+                <label class="option"><input type="radio" name="q10" value="b"><span class="option-label">B</span><span class="option-text">Соответствие IP → MAC</span></label>
+                <label class="option"><input type="radio" name="q10" value="c"><span class="option-label">C</span><span class="option-text">Пароли</span></label>
+                <label class="option"><input type="radio" name="q10" value="d"><span class="option-label">D</span><span class="option-text">Открытые порты</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 11 -->
+        <div class="question-card" data-id="11">
+            <div class="question-header">
+                <span class="question-number">Вопрос 11</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Какой тип XSS сохраняется на сервере?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q11" value="a"><span class="option-label">A</span><span class="option-text">Reflected</span></label>
+                <label class="option"><input type="radio" name="q11" value="b"><span class="option-label">B</span><span class="option-text">Stored</span></label>
+                <label class="option"><input type="radio" name="q11" value="c"><span class="option-label">C</span><span class="option-text">Blind</span></label>
+                <label class="option"><input type="radio" name="q11" value="d"><span class="option-label">D</span><span class="option-text">Local</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 12 -->
+        <div class="question-card" data-id="12">
+            <div class="question-header">
+                <span class="question-number">Вопрос 12</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что делает OCSP?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q12" value="a"><span class="option-label">A</span><span class="option-text">Генерирует сертификаты</span></label>
+                <label class="option"><input type="radio" name="q12" value="b"><span class="option-label">B</span><span class="option-text">Проверяет структуру</span></label>
+                <label class="option"><input type="radio" name="q12" value="c"><span class="option-label">C</span><span class="option-text">Проверяет статус сертификата</span></label>
+                <label class="option"><input type="radio" name="q12" value="d"><span class="option-label">D</span><span class="option-text">Продлевает автоматически</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 13 -->
+        <div class="question-card" data-id="13">
+            <div class="question-header">
+                <span class="question-number">Вопрос 13</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Какой инструмент применяют для взлома хэшей offline?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q13" value="a"><span class="option-label">A</span><span class="option-text">Burp Suite</span></label>
+                <label class="option"><input type="radio" name="q13" value="b"><span class="option-label">B</span><span class="option-text">Wireshark</span></label>
+                <label class="option"><input type="radio" name="q13" value="c"><span class="option-label">C</span><span class="option-text">Hashcat / John</span></label>
+                <label class="option"><input type="radio" name="q13" value="d"><span class="option-label">D</span><span class="option-text">Nmap</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 14 -->
+        <div class="question-card" data-id="14">
+            <div class="question-header">
+                <span class="question-number">Вопрос 14</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что такое MITM?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q14" value="a"><span class="option-label">A</span><span class="option-text">Удаление файлов</span></label>
+                <label class="option"><input type="radio" name="q14" value="b"><span class="option-label">B</span><span class="option-text">Перехват трафика</span></label>
+                <label class="option"><input type="radio" name="q14" value="c"><span class="option-label">C</span><span class="option-text">SQL-инъекция</span></label>
+                <label class="option"><input type="radio" name="q14" value="d"><span class="option-label">D</span><span class="option-text">Backup</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 15 -->
+        <div class="question-card" data-id="15">
+            <div class="question-header">
+                <span class="question-number">Вопрос 15</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Какой атрибут содержит домены?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q15" value="a"><span class="option-label">A</span><span class="option-text">CN</span></label>
+                <label class="option"><input type="radio" name="q15" value="b"><span class="option-label">B</span><span class="option-text">SAN</span></label>
+                <label class="option"><input type="radio" name="q15" value="c"><span class="option-label">C</span><span class="option-text">OU</span></label>
+                <label class="option"><input type="radio" name="q15" value="d"><span class="option-label">D</span><span class="option-text">CRL</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 16 -->
+        <div class="question-card" data-id="16">
+            <div class="question-header">
+                <span class="question-number">Вопрос 16</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что делает DNS Spoofing?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q16" value="a"><span class="option-label">A</span><span class="option-text">Меняет ARP</span></label>
+                <label class="option"><input type="radio" name="q16" value="b"><span class="option-label">B</span><span class="option-text">Подменяет IP</span></label>
+                <label class="option"><input type="radio" name="q16" value="c"><span class="option-label">C</span><span class="option-text">Меняет cookie</span></label>
+                <label class="option"><input type="radio" name="q16" value="d"><span class="option-label">D</span><span class="option-text">Открывает порт</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 17 -->
+        <div class="question-card" data-id="17">
+            <div class="question-header">
+                <span class="question-number">Вопрос 17</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Минимальный уровень DVWA?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q17" value="a"><span class="option-label">A</span><span class="option-text">Medium</span></label>
+                <label class="option"><input type="radio" name="q17" value="b"><span class="option-label">B</span><span class="option-text">High</span></label>
+                <label class="option"><input type="radio" name="q17" value="c"><span class="option-label">C</span><span class="option-text">Impossible</span></label>
+                <label class="option"><input type="radio" name="q17" value="d"><span class="option-label">D</span><span class="option-text">Low</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 18 -->
+        <div class="question-card" data-id="18">
+            <div class="question-header">
+                <span class="question-number">Вопрос 18</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что такое brute-force?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q18" value="a"><span class="option-label">A</span><span class="option-text">Анализ кода</span></label>
+                <label class="option"><input type="radio" name="q18" value="b"><span class="option-label">B</span><span class="option-text">SQL-инъекция</span></label>
+                <label class="option"><input type="radio" name="q18" value="c"><span class="option-label">C</span><span class="option-text">Полный перебор</span></label>
+                <label class="option"><input type="radio" name="q18" value="d"><span class="option-label">D</span><span class="option-text">Перехват cookie</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 19 -->
+        <div class="question-card" data-id="19">
+            <div class="question-header">
+                <span class="question-number">Вопрос 19</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Где хранится история входов?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q19" value="a"><span class="option-label">A</span><span class="option-text">/etc/shadow</span></label>
+                <label class="option"><input type="radio" name="q19" value="b"><span class="option-label">B</span><span class="option-text">/etc/passwd</span></label>
+                <label class="option"><input type="radio" name="q19" value="c"><span class="option-label">C</span><span class="option-text">/var/log/syslog</span></label>
+                <label class="option"><input type="radio" name="q19" value="d"><span class="option-label">D</span><span class="option-text">/var/log/auth.log</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 20 -->
+        <div class="question-card" data-id="20">
+            <div class="question-header">
+                <span class="question-number">Вопрос 20</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что решает HSTS?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q20" value="a"><span class="option-label">A</span><span class="option-text">Cookies</span></label>
+                <label class="option"><input type="radio" name="q20" value="b"><span class="option-label">B</span><span class="option-text">Скорость</span></label>
+                <label class="option"><input type="radio" name="q20" value="c"><span class="option-label">C</span><span class="option-text">Принудительное HTTPS</span></label>
+                <label class="option"><input type="radio" name="q20" value="d"><span class="option-label">D</span><span class="option-text">DNS</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 21 -->
+        <div class="question-card" data-id="21">
+            <div class="question-header">
+                <span class="question-number">Вопрос 21</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что делает chmod g+w file?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q21" value="a"><span class="option-label">A</span><span class="option-text">Всё всем</span></label>
+                <label class="option"><input type="radio" name="q21" value="b"><span class="option-label">B</span><span class="option-text">Только владелец</span></label>
+                <label class="option"><input type="radio" name="q21" value="c"><span class="option-label">C</span><span class="option-text">Группе запись</span></label>
+                <label class="option"><input type="radio" name="q21" value="d"><span class="option-label">D</span><span class="option-text">Удаляет права</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 22 -->
+        <div class="question-card" data-id="22">
+            <div class="question-header">
+                <span class="question-number">Вопрос 22</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Анализ сетевых пакетов?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q22" value="a"><span class="option-label">A</span><span class="option-text">Hydra</span></label>
+                <label class="option"><input type="radio" name="q22" value="b"><span class="option-label">B</span><span class="option-text">SQLMap</span></label>
+                <label class="option"><input type="radio" name="q22" value="c"><span class="option-label">C</span><span class="option-text">Hashcat</span></label>
+                <label class="option"><input type="radio" name="q22" value="d"><span class="option-label">D</span><span class="option-text">Wireshark</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 23 -->
+        <div class="question-card" data-id="23">
+            <div class="question-header">
+                <span class="question-number">Вопрос 23</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что такое TLS?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q23" value="a"><span class="option-label">A</span><span class="option-text">Хранение паролей</span></label>
+                <label class="option"><input type="radio" name="q23" value="b"><span class="option-label">B</span><span class="option-text">Защита трафика</span></label>
+                <label class="option"><input type="radio" name="q23" value="c"><span class="option-label">C</span><span class="option-text">Сканирование</span></label>
+                <label class="option"><input type="radio" name="q23" value="d"><span class="option-label">D</span><span class="option-text">Логи</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 24 -->
+        <div class="question-card" data-id="24">
+            <div class="question-header">
+                <span class="question-number">Вопрос 24</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Что такое reflected XSS?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q24" value="a"><span class="option-label">A</span><span class="option-text">Сохранен навсегда</span></label>
+                <label class="option"><input type="radio" name="q24" value="b"><span class="option-label">B</span><span class="option-text">Отражается в ответе</span></label>
+                <label class="option"><input type="radio" name="q24" value="c"><span class="option-label">C</span><span class="option-text">Серверный</span></label>
+                <label class="option"><input type="radio" name="q24" value="d"><span class="option-label">D</span><span class="option-text">В БД</span></label>
+            </div>
+        </div>
+
+        <!-- Вопрос 25 -->
+        <div class="question-card" data-id="25">
+            <div class="question-header">
+                <span class="question-number">Вопрос 25</span>
+                <span class="question-points">+1 балл</span>
+            </div>
+            <div class="question-text">Признак ARP-spoof?</div>
+            <div class="options-container">
+                <label class="option"><input type="radio" name="q25" value="a"><span class="option-label">A</span><span class="option-text">Разные TTL</span></label>
+                <label class="option"><input type="radio" name="q25" value="b"><span class="option-label">B</span><span class="option-text">Разные MAC для одного IP</span></label>
+                <label class="option"><input type="radio" name="q25" value="c"><span class="option-label">C</span><span class="option-text">Большой трафик</span></label>
+                <label class="option"><input type="radio" name="q25" value="d"><span class="option-label">D</span><span class="option-text">21 порт</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="test-navigation">
+        <button class="nav-btn prev-btn" id="prevBtn" disabled>
+            <span class="nav-btn-icon">←</span>
+            Назад
+        </button>
+
+        <div class="question-indicators" id="questionIndicators">
+            <!-- Indicators will be generated dynamically -->
+        </div>
+
+        <button class="nav-btn next-btn" id="nextBtn">
+            Далее
+            <span class="nav-btn-icon">→</span>
+        </button>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section" id="resultsSection" style="display: none;">
+        <div class="results-card">
+            <div class="results-header">
+                <div class="results-icon">🏆</div>
+                <h2 class="results-title">Тест завершён!</h2>
+                <p class="results-subtitle">Ваши результаты</p>
+            </div>
+
+            <div class="results-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="finalScore">0</div>
+                    <div class="stat-label">Правильных ответов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="finalPercentage">0%</div>
+                    <div class="stat-label">Точность</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="timeSpent">0:00</div>
+                    <div class="stat-label">Время</div>
+                </div>
+            </div>
+
+            <div class="level-badge" id="levelBadge">
+                <div class="level-icon">📊</div>
+                <div class="level-info">
+                    <div class="level-name" id="levelName">ДНО</div>
+                    <div class="level-desc" id="levelDesc">Нужно учиться</div>
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button class="action-btn primary-btn" id="checkTestBtn">
+                    <span class="btn-icon">✅</span>
+                    Завершить и получить очки
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="/js/tests.js"></script>
+</body>
+</html>

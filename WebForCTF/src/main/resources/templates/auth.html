@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication - CTF Platform</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/pages/auth.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="body-auth">
+<!-- Background Elements -->
+<div class="background"></div>
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h3 class="tooltip" data-tip="ANIGILATION">
+                    Welcome Back
+                </h3>
+
+                <p th:text="${isLogin ? 'Sign in to your account' : 'Create your account'}"></p>
+            </div>
+
+            <form th:action="${isLogin ? '/login' : '/register'}" method="post" class="auth-form" id="authForm">
+                <!-- Username -->
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="Username" required
+                           th:attr="minlength=${isLogin ? '0' : '3'}"
+                           oninput="validateUsername(this)">
+                    <div class="validation-message" id="usernameValidation"></div>
+                </div>
+
+                <!-- Email (only for registration) -->
+                <th:block th:unless="${isLogin}">
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email" required
+                               oninput="validateEmail(this)">
+                        <div class="validation-message" id="emailValidation"></div>
+                    </div>
+                </th:block>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Password" required
+                           th:attr="minlength=${isLogin ? '0' : '6'}">
+                    <th:block th:unless="${isLogin}">
+                        <div class="validation-message" id="passwordStrength"></div>
+                    </th:block>
+                </div>
+
+                <!-- Confirm Password (only for registration) -->
+                <th:block th:unless="${isLogin}">
+                    <div class="form-group">
+                        <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+                        <div class="validation-message" id="confirmPasswordValidation"></div>
+                    </div>
+                </th:block>
+
+                <!-- Error Message -->
+                <th:block th:if="${error}">
+                    <div class="error-message" th:text="${error}"></div>
+                </th:block>
+
+                <!-- Submit Button -->
+                <button type="submit" class="cta-btn primary full-width">
+                    <span th:text="${isLogin ? 'Sign In' : 'Create Account'}"></span>
+                </button>
+            </form>
+
+            <!-- KRAB -->
+            <div class="auth-switch">
+                <th:block th:if="${isLogin}">
+                    <p>Don't have an account? <a th:href="@{/auth(register='true')}">Sign up</a></p>
+                </th:block>
+                <th:block th:unless="${isLogin}">
+                    <p>Already have an account? <a th:href="@{/auth}">Sign in</a></p>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="/js/utils.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/auth.js"></script>
+
+<script>
+    function showOAuthMessage(provider) {
+        event.preventDefault();
+        const message = `🚧 ${provider} OAuth integration is coming soon!\n\nThis feature is currently under development. Please use email registration for now.`;
+        alert(message);
+    }
+</script>
+</body>
+</html>

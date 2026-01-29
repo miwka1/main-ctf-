@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Security Challenges - CTF Platform</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/pages/categories.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        .challenge-card {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .challenge-card.completed {
+            opacity: 0.7;
+            filter: grayscale(0.5);
+        }
+        
+        .challenge-completed-marker {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #00ff88;
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .no-challenges-message {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            grid-column: 1 / -1;
+        }
+        
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body class="body-web">
+<div class="background"></div>
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <section class="category-header">
+        <h1 class="section-title">🌐 Web Security</h1>
+        <p class="category-subtitle">Web application security challenges</p>
+    </section>
+
+    <div class="challenges-grid" id="challengesGrid">
+        <!-- Auth Bypass Challenge -->
+        <div class="challenge-card" onclick="window.location.href='/challenges/auth-bypass'">
+            <div class="challenge-icon">🔓</div>
+            <h3>Authentication Bypass</h3>
+            <p>Bypass authentication mechanisms using various techniques including token manipulation and session hijacking.</p>
+            <div class="challenge-meta">
+                <span class="badge easy">Easy</span>
+                <span class="points">3 pts</span>
+            </div>
+            <div class="challenge-actions">
+                <button class="cta-btn secondary small" onclick="event.stopPropagation(); showChallengeHint('Authentication Bypass')">
+                    💡 Подсказка
+                </button>
+            </div>
+        </div>
+
+        <!-- SQL Injection Challenge -->
+        <div class="challenge-card" onclick="window.location.href='/challenges/sqli'">
+            <div class="challenge-icon">💉</div>
+            <h3>SQL Injection Basic</h3>
+            <p>Exploit SQL injection vulnerabilities to bypass login forms and extract sensitive information.</p>
+            <div class="challenge-meta">
+                <span class="badge easy">Easy</span>
+                <span class="points">5 pts</span>
+            </div>
+            <div class="challenge-actions">
+                <button class="cta-btn secondary small" onclick="event.stopPropagation(); showChallengeHint('SQL Injection Basic')">
+                    💡 Подсказка
+                </button>
+            </div>
+        </div>
+
+        <!-- XSS Challenge -->
+        <div class="challenge-card" onclick="window.location.href='/challenges/xss'">
+            <div class="challenge-icon">🦠</div>
+            <h3>XSS Challenge</h3>
+            <p>Execute cross-site scripting attacks to steal cookies and perform actions on behalf of users.</p>
+            <div class="challenge-meta">
+                <span class="badge medium">Medium</span>
+                <span class="points">10 pts</span>
+            </div>
+            <div class="challenge-actions">
+                <button class="cta-btn secondary small" onclick="event.stopPropagation(); showChallengeHint('XSS Challenge')">
+                    💡 Подсказка
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Category Info -->
+    <div class="category-info card">
+        <h3>About Web Security Challenges</h3>
+        <p>Web security challenges focus on finding and exploiting vulnerabilities in web applications. These challenges cover:</p>
+        <ul class="info-list">
+            <li>🔓 <strong>Authentication Bypass</strong> - Circumventing login mechanisms</li>
+            <li>💉 <strong>SQL Injection</strong> - Manipulating database queries</li>
+            <li>🦠 <strong>Cross-Site Scripting (XSS)</strong> - Executing malicious scripts</li>
+        </ul>
+
+        <div class="progress-info" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p><small>Завершенные задания автоматически скрываются со страницы. Чтобы увидеть все задания, очистите прогресс в настройках.</small></p>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script src="/js/utils.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/challenges/web-challenges.js"></script>
+
+<script>
+    // Дополнительный скрипт для обновления статуса завершения
+    document.addEventListener('DOMContentLoaded', async function() {
+        setTimeout(async () => {
+            try {
+                const response = await fetch('/api/challenges/progress');
+                if (response.ok) {
+                    const progress = await response.json();
+                    
+                    // Подсчитываем завершенные
+                    const completed = progress.filter(p => p.completed).length;
+                    const total = 4; // Общее количество веб-челленджей
+                    
+                    const completionStatus = document.getElementById('completionStatus');
+                    const completedCount = document.getElementById('completedCount');
+                    const totalCount = document.getElementById('totalCount');
+                    
+                    if (completionStatus && completedCount && totalCount) {
+                        completedCount.textContent = completed;
+                        totalCount.textContent = total;
+                        completionStatus.style.display = 'block';
+                    }
+                    
+                    // Показываем сообщение, если все задания завершены
+                    if (completed === total) {
+                        const challengesGrid = document.getElementById('challengesGrid');
+                        if (challengesGrid) {
+                            const message = document.createElement('div');
+                            message.className = 'no-challenges-message';
+                            message.innerHTML = `
+                                <h3>🎉 Все задания завершены!</h3>
+                                <p>Вы успешно выполнили все веб-челленджи. Возвращайтесь позже для новых заданий.</p>
+                            `;
+                            challengesGrid.appendChild(message);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.log('Не удалось загрузить статус завершения:', error);
+            }
+        }, 1000);
+    });
+</script>
+</body>
+</html>

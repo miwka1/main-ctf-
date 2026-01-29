@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection Challenge - CTF Platform</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/challenges/sqli.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="body-web">
+<!-- Background Elements -->
+<div class="background"></div>
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Challenge Header -->
+    <section class="challenge-header">
+        <div class="challenge-title">
+            <div class="challenge-icon">💉</div>
+            <h1>SQL Injection Challenge</h1>
+            <p class="challenge-description">Обойдите аутентификацию с помощью SQL инъекции. Найдите флаг в базе данных.</p>
+            <div class="challenge-meta">
+                <span class="difficulty-badge easy">Easy</span>
+                <span class="points-badge">5 points</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="challenge-main">
+        <div class="challenge-container">
+            <div class="login-form card">
+                <h3>🔐 Вход в систему</h3>
+                <p>Попробуйте обойти аутентификацию с помощью SQL инъекции</p>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="username" name="username" placeholder="Username" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder="Password" required class="form-input">
+                    </div>
+                    <button type="submit" class="cta-btn primary full-width">Login</button>
+                </form>
+
+                <div id="message" class="message" style="display: none;"></div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- JavaScript -->
+<script src="/js/utils.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/challenges/sqli.js"></script>
+</body>
+</html>

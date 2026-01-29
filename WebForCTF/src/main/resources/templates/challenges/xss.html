@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Challenge - CTF Platform</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/challenges/xss.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        .comment {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .comment.xss-detected {
+            border-left: 4px solid #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+        
+        .xss-highlight {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .challenge-completed-message {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .challenge-completed-message h4 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+        
+        .completion-details p {
+            margin: 0.5rem 0;
+        }
+        
+        .completion-details strong {
+            color: #00ff88;
+        }
+        
+        .attempts-counter {
+            margin: 1rem 0;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .attempts-counter span:first-child {
+            color: var(--text-primary);
+        }
+        
+        .attempts-counter span:last-child {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        @keyframes xssFlash {
+            0% { background: rgba(255, 68, 68, 0); }
+            50% { background: rgba(255, 68, 68, 0.3); }
+            100% { background: rgba(255, 68, 68, 0); }
+        }
+        
+        .payload-status {
+            display: inline-block;
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            background: var(--background-card);
+        }
+        
+        .payload-status.found {
+            background: #00ff88;
+            color: #000;
+        }
+        
+        .xss-example {
+            cursor: pointer;
+        }
+        
+        .xss-example:hover {
+            background: rgba(0, 255, 136, 0.1) !important;
+            border-color: rgba(0, 255, 136, 0.5) !important;
+        }
+    </style>
+</head>
+<body class="body-web">
+<!-- Background Elements -->
+<div class="background"></div>
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Challenge Header -->
+    <section class="challenge-header">
+        <div class="challenge-title">
+            <div class="challenge-icon">🦠</div>
+            <h1>XSS Challenge</h1>
+            <p class="challenge-description">Find and execute 4 different types of XSS payloads</p>
+            <div class="challenge-meta">
+                <span class="difficulty-badge medium">Medium</span>
+                <span class="points-badge">10 points</span>
+            </div>
+            <p class="challenge-instructions">
+                <small>Задача: найдите 4 различных типа XSS payload'ов. Каждый найденный тип подсвечивается в комментариях.</small>
+            </p>
+        </div>
+    </section>
+
+    <main class="challenge-main">
+        <div class="challenge-content">
+            <div class="comment-section card">
+                <h3>💬 Vulnerable Comment System</h3>
+                <p>This comment system has XSS vulnerabilities. Try different payloads to find 4 different types.</p>
+
+                <div class="alert-warning">
+                    ⚠️ <strong>Educational Purpose Only:</strong> This page is intentionally vulnerable to XSS attacks for learning purposes.
+                </div>
+
+                <div class="comment-input-group">
+                    <input type="text" id="commentInput" placeholder="Enter XSS payload..." class="form-input">
+                    <button id="postCommentBtn" class="cta-btn primary">Test Payload</button>
+                </div>
+
+                <!-- Display area for comments -->
+                <div id="commentsContainer" class="comments-container">
+                    <!-- Comments will be loaded here -->
+                </div>
+
+                <!-- Challenge Controls -->
+                <div class="challenge-controls" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button type="button" id="resetCommentsBtn" class="cta-btn secondary">Clear Comments</button>
+                    <button type="button" id="showExamplesBtn" class="cta-btn secondary">Show Payload Examples</button>
+                    <button type="button" id="clearPayloadsBtn" class="cta-btn secondary">Reset Found Payloads</button>
+                </div>
+
+                <!-- Progress Info -->
+                <div class="progress-info" style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <h4>📊 Challenge Requirements:</h4>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li>Find 4 different types of XSS payloads</li>
+                        <li>Maximum 8 attempts allowed</li>
+                        <li>Detected payloads are highlighted in comments</li>
+                        <li>Complete to earn 10 points</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- JavaScript -->
+<script src="/js/utils.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/challenges/xss.js"></script>
+</body>
+</html>

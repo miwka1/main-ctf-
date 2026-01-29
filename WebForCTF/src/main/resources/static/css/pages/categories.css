@@ -1,0 +1,446 @@
+/* CATEGORIES PAGE STYLES - ОБНОВЛЕННЫЕ КАРТОЧКИ */
+
+/* Category-specific accent colors */
+.body-web { --accent-color: #4ecdc4; }
+.body-pwn { --accent-color: #ff6b6b; }
+.body-crypto { --accent-color: #45b7d1; }
+
+/* Header Styles */
+.category-header {
+    text-align: center;
+    padding: 4rem 0 2rem;
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: var(--primary-color);
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+}
+
+.category-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+/* Единые стили для карточек заданий во всех разделах */
+.challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 1rem;
+}
+
+.challenge-card {
+    background: rgba(26, 26, 26, 0.9);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    outline: none;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    height: 100%;
+}
+
+.challenge-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 255, 136, 0.1), 
+        transparent);
+    transition: left 0.7s ease;
+    z-index: 1;
+}
+
+.challenge-card:hover::before {
+    left: 100%;
+}
+
+.challenge-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    border-color: var(--primary-color);
+}
+
+.challenge-card:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+/* Иконка задания */
+.challenge-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--primary-color);
+    filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.3));
+    z-index: 2;
+    position: relative;
+}
+
+/* Заголовок карточки */
+.challenge-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.3;
+    z-index: 2;
+    position: relative;
+}
+
+/* Описание задания */
+.challenge-card p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    flex-grow: 1;
+    font-size: 0.95rem;
+    z-index: 2;
+    position: relative;
+}
+
+/* Мета-информация (сложность и очки) */
+.challenge-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    z-index: 2;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Бейдж сложности */
+.badge {
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.badge.easy {
+    background: rgba(0, 255, 136, 0.15);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.2);
+}
+
+.badge.medium {
+    background: rgba(255, 165, 0, 0.15);
+    color: #ffa500;
+    border: 1px solid #ffa500;
+    box-shadow: 0 0 8px rgba(255, 165, 0, 0.2);
+}
+
+.badge.hard {
+    background: rgba(255, 0, 136, 0.15);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 8px rgba(255, 0, 136, 0.2);
+}
+
+.badge.completed {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: 1px solid #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Очки */
+.points {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.points::before {
+    content: '★';
+    font-size: 0.8rem;
+}
+
+/* Кнопки действий на карточке */
+.challenge-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: 2;
+    position: relative;
+}
+
+/* Единые стили кнопок на карточках */
+.cta-btn.small {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+    min-width: auto;
+    flex: 1;
+    max-width: none;
+    height: 36px;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.cta-btn.small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 255, 136, 0.3);
+}
+
+.cta-btn.primary.small {
+    background: linear-gradient(135deg, var(--primary-color), #00cc6a);
+    border: 1px solid var(--primary-color);
+    color: #000;
+}
+
+.cta-btn.primary.small:hover {
+    background: linear-gradient(135deg, #00ff88, #00ffaa);
+    border-color: #00ff88;
+}
+
+.cta-btn.secondary.small {
+    background: rgba(255, 165, 0, 0.15);
+    border: 1px solid #ffa500;
+    color: #ffa500;
+}
+
+.cta-btn.secondary.small:hover {
+    background: rgba(255, 165, 0, 0.25);
+    border-color: #ff8c00;
+    color: #ff8c00;
+    box-shadow: 0 6px 15px rgba(255, 165, 0, 0.3);
+}
+
+/* Стили для заблокированных заданий */
+.challenge-disabled {
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+    filter: grayscale(70%) !important;
+    pointer-events: none !important;
+}
+
+.challenge-disabled:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: var(--border-color) !important;
+}
+
+.cta-btn.disabled {
+    background: #4a5568 !important;
+    color: #a0aec0 !important;
+    border-color: #4a5568 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+}
+
+.cta-btn.disabled:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Category Info */
+.category-info {
+    margin-top: 4rem;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.info-list li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-list li::before {
+    content: '▶';
+    color: var(--primary-color);
+    font-size: 0.8rem;
+}
+
+/* Анимация появления карточек */
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.challenge-card {
+    animation: cardAppear 0.4s ease-out forwards;
+    opacity: 0;
+}
+
+.challenge-card:nth-child(1) { animation-delay: 0.1s; }
+.challenge-card:nth-child(2) { animation-delay: 0.2s; }
+.challenge-card:nth-child(3) { animation-delay: 0.3s; }
+.challenge-card:nth-child(4) { animation-delay: 0.4s; }
+.challenge-card:nth-child(5) { animation-delay: 0.5s; }
+.challenge-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Адаптивность */
+
+/* Планшеты */
+@media (max-width: 1024px) {
+    .challenges-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.2rem;
+    }
+    
+    .challenge-card {
+        padding: 1.2rem;
+        min-height: 260px;
+    }
+    
+    .challenge-icon {
+        font-size: 2.2rem;
+    }
+    
+    .challenge-card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+    .challenges-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+    
+    .category-header {
+        padding: 2rem 0 1rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .challenge-card {
+        padding: 1.5rem;
+        min-height: 250px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .challenge-actions {
+        flex-direction: row;
+        gap: 0.6rem;
+    }
+    
+    .cta-btn.small {
+        padding: 0.45rem 1rem;
+        font-size: 0.75rem;
+        height: 34px;
+    }
+}
+
+/* Маленькие мобильные */
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .category-subtitle {
+        font-size: 1rem;
+    }
+    
+    .challenge-card {
+        padding: 1.2rem;
+        min-height: 240px;
+        width: 100%;
+    }
+    
+    .challenge-icon {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .challenge-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    .challenge-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .challenge-meta {
+        margin-bottom: 1rem;
+    }
+    
+    .challenge-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .cta-btn.small {
+        width: 100%;
+        height: 38px;
+        padding: 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Поддержка уменьшенной анимации */
+@media (prefers-reduced-motion: reduce) {
+    .challenge-card,
+    .challenge-card::before,
+    .cta-btn.small {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .challenge-card:hover {
+        transform: none !important;
+    }
+}
